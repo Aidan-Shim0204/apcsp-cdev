@@ -1,25 +1,14 @@
 #include <stdio.h>
 #include<math.h>
-// for testing only - do not change
-void getTestInput(int argc, char* argv[], float* a, int* b)
-{
-  if (argc == 3) {
-    sscanf(argv[1], "%f", a);
-    sscanf(argv[2], "%d", b);
-  }
-}
-
 
 
 // add your areaOfCircle function here - it must NOT printf, instead it must
-int areaOfCircle(float radius)
+int areaOfCircle(int radius)
 {
   
   float area;
-  float pi = 3.14159;
-  area = pi * radius * radius;
-
-  return area;
+   area = M_PI * radius * radius;
+   printf("area at radius %d is equal to %f\n", radius, area);
 }
 // return the result to be printed in main
 
@@ -30,24 +19,47 @@ int main(int argc, char* argv[])
 {
   // the two variables which control the number of times areaOfCircle is called
   // in this case 5.2, 6.2, 7.2
-  float start = 5.2;
-  int reps = 3;
+  float start;
+  float end;
+  char input[256]; 
   
-  // for testing only - do not change
-  getTestInput(argc, argv, &start, &reps);
+  printf("Enter the lower bound: \n");
+  
+  while(1)
+  {
+    fgets(input, 256, stdin);
+    if (sscanf(input, "%f", &start) == 1) break;
+    printf("Not a valid input - do again\n");
 
-  printf("calculating area of circle starting at %f, and ending at %f\n", start, start+reps-1);
+  }
+  printf("Enter the upper bound: \n");
+  
+  while(1)
+  {
+    fgets(input, 256, stdin);
+    if (sscanf(input, "%f", &end) == 1) break;
+    printf("Not a valid input - do again\n");
+  }
+   
+  if (end <= start || end < 0)
+  {
+    printf("Input an upper bound that is positive or greater than the lower bound\n");
+  }
+  if (start < 0 || start >= end)
+  {
+    printf("Input a lower bound smaller than the upper bound and make your lower bound positive\n");
+  }
+
+  // for testing only - do not change
+
+  printf("calculating area of circle starting at %f, and ending at %f\n", start, end);
   
   // add your code below to call areaOfCircle function with values between
   
 
-for (float start = 5.2; start < 7.2; start++)
+for (float a = start; a <= end; a++)
 {
-   int a = start;
-   int r = areaOfCircle(a);
-   printf("area of circles are: %d\n", r);
-  // start and end
-
+  areaOfCircle(a);
 }
 
   
